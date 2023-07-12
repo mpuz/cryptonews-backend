@@ -17,6 +17,7 @@ const db = client.db()
 const articles = db.collection('articles')
 articles.createIndex({ guid: 1 }, { unique: true })
 
+//TODO - remove when looping is ready
 const headers = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36',
     "Accept": "text / html, application/ xhtml + xml, application/xml;q=0.9,image/avif, image / webp, image / apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
@@ -34,6 +35,7 @@ const headers = {
 }
 
 import Parser from 'rss-parser';
+
 let parser = new Parser({
     requestOptions: {
         // uncomment to route requests through proxy
@@ -43,7 +45,6 @@ let parser = new Parser({
         },
     }
 });
-
 
 // another parser - another user-agent
 let parser1 = new Parser(
@@ -58,8 +59,6 @@ let parser1 = new Parser(
         }
     });
 
-//import FeedParser from 'feedparser'
-//var feedparser = new FeedParser();
 
 const wait = async (ms) => {
     return new Promise((resolve) => { setTimeout(resolve, ms) });
@@ -68,6 +67,9 @@ const wait = async (ms) => {
 import { URLS } from './config/rss-sources.js'
 
 var rssNum = 0
+
+
+
 
 
 const parseFeed = async (myurl) => {
